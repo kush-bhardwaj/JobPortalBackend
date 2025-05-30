@@ -18,13 +18,13 @@ exports.registerUser = async (req, res) => {
                     <body>
                     <h1>${name}</h1>
                     <p>Welcome ${name}</p>
-                    <span>click on this link to verify <a href='http://192.168.111.11:8081/api/v1/user/verify/${userRegister._id}'>Verify Here</a></span>
+                    <span>click on this link to verify <a href='http://192.168.0.4:8081/api/v1/user/verify/${userRegister._id}'>Verify Here</a></span>
                     </body>
                     </html>
                 `
                 SentMail(userRegister.email ,"Singup Success"," " ,sentHTML);
                 res.status(200).json({
-                    status: true, message: "regsiter successfull"
+                    status: true, message: "Signup Success Check Mail To verify..."
                 })
             }
             else {
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
         const isUser = await userModel.findOne({ email });
         if (isUser) {
             
-            if (await compareHasPassword(password,isUser.password)) {
+            if (await compareHasPassword(password,isUser.password)) {   
                 const payload ={
                     email:isUser.email,
                     name:isUser.name,
@@ -97,3 +97,5 @@ exports.verifyUser = async(req,res)=>{
         return res.status(400).json({message:"something went wrong to verify"});
     }
 }
+
+

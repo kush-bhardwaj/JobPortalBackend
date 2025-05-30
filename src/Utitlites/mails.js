@@ -5,8 +5,8 @@ const MailTransporter = nodemailer.createTransport({
     port:587,
     secure:false,
     auth:{
-        user:"kushbhardwaj8800@gmail.com",
-        pass:"uaqbavzgcbwqlskn"
+        user:process.env.Email_User,
+        pass:process.env.Email_Pass
     }
 })
 async function SentMail(to, subject , text , html) {
@@ -18,6 +18,5 @@ async function SentMail(to, subject , text , html) {
         text:text,
         html:html
     })
-    console.log("Mail Sent.")
 }
 module.exports = SentMail;
